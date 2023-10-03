@@ -9,7 +9,11 @@ links:
   - title: 黑墨水鱼
     description: 水族馆
     website: https://aquarium39.moe/
-    image: https://aquarium39.moe/static/8ffe4e574e0dec766a918bfb10988f09/300de/green.webp
+    image: https://aquarium39.moe/images/green_hucfe397aa1f9bbdf54c031f3998449e9a_2721651_2048x0_resize_q75_h2_box.webp
+  - title: Kirin
+    description: Kirin's Backspace
+    website: https://9baka.moe/zh/
+    image: https://9baka.moe/images/avatar.jpg
 menu:
     main: 
         weight: -50
