@@ -1,0 +1,150 @@
+/*全局设置*/
+:root {
+    --body-background: #f5f0f0;
+}
+
+.main-container {
+    padding-left: 1em !important;
+    padding-right: 1em !important;
+}
+
+@media(min-width: 768px) {
+    .main-container {
+        padding-left: 4em !important;
+        padding-right: 4em !important;
+    }
+}
+
+.article-subtitle {
+    font-size: 1.1rem !important;
+}
+
+@media(min-width: 1280px) {
+    .article-subtitle {
+        font-size: 1.5rem !important;
+    }
+}
+
+
+/*内联code block*/
+.article-content code {
+    margin: 0px 3px;
+}
+
+code {
+    font-size: 0.9em;
+}
+
+:root {
+    --code-text-color: #852222 !important;
+    --code-background-color: rgba(0, 0, 0, 0.06) !important;
+}
+
+:root[data-scheme=dark] {
+    --code-text-color: #f5f0f0 !important;
+    --code-background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/*
+代码卡片边框
+*/
+.article-content .highlight {
+    padding: 10px var(--card-padding) !important;
+    margin-top: 0.5em !important;
+    margin-bottom: 1em !important;
+}
+
+/*文段内文字*/
+.article-content>p { /*文段间距*/
+    margin: 0.2em 0 !important; 
+}
+
+ul { /*列表间距*/
+    margin-block-start: 0.2em !important; 
+    margin-block-end: 0.5em !important;
+}
+ul p, ol p {
+    margin: 0!important;
+}
+
+/*文段行高*/
+:root {
+    --article-line-height: 1.7 !important;
+}
+
+/*标题和引用颜色*/
+:root {
+    --accent-color: #4a2a2a !important;
+    --card-text-color-main: #301010 !important; /*文字颜色*/
+    --card-separator-color: rgba(230, 200, 200, 0.5) ! important; /*引用块左侧竖线颜色*/
+    --blockquote-background-color: rgb(250 245 245) !important;   /*引用块背景颜色*/
+}
+
+:root[data-scheme=dark]{
+    --accent-color: #f5f0f0 !important;
+    --card-text-color-main: #f5f0f0 !important;
+    --card-separator-color: rgba(230, 200, 200, 0.5) ! important;
+    --blockquote-background-color: rgb(75, 65, 65) !important;
+}
+
+.article-page .main-article .article-content { /*文段前空当*/
+    margin:0!important;
+}
+
+/*h1,
+h2,
+h3,
+h4,
+h5 {
+    color: #301010 !important;
+}*/
+
+/*toc*/
+.widget--toc #TableOfContents li {
+    margin: 5px 0 5px 5px;
+    padding: 5px
+}
+
+.widget--toc #TableOfContents {
+    padding: 1em 1em 1em 1em !important;
+}
+
+/*首页文章卡片*/
+.article-details {
+    padding-top: calc((var(--card-padding)) * 0.6) !important;
+    padding-bottom: calc((var(--card-padding)) * 0.75) !important;
+}
+
+.article-list {
+    gap: 20px !important;
+}
+
+.article-title-wrapper{
+    gap: 3px !important;
+}
+
+/*菜单*/
+.menu li a {
+    width: 100%;
+    padding-top: 10px!important;
+    padding-bottom: 10px!important;
+}
+.menu,
+.menu .menu-bottom-section {
+    gap: 10px!important;
+}
+
+/* 卡片 */
+.article-list--tile article .article-details {
+    justify-content: center!important;
+}
+
+.related-content article,
+.subsection-list .article-list--tile article {
+    height: 100px !important;
+}
+
+/*文章列表*/
+.article-list--compact article .article-details{
+    padding:0!important;
+}
