@@ -21,8 +21,10 @@ os.chdir(f"{base_path}\\build")
 # 运行hugo
 os.system(f"hugo --buildExpired  --buildFuture --config hugo.yaml")
 
+# 复制google验证文件
+os.system(f"copy google*.html public /y")
+
 # 将更改发布到服务器
 print("Uploading publish file to server...")
-#os.system(f"rclone delete qcloud:/opt/blog/public --config .config --rmdirs")
 os.system(f"rclone sync public qcloud:/opt/blog/public --config .config")
 webbrowser.open_new("https://blog.steven53.top")

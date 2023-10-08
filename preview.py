@@ -13,7 +13,6 @@ os.system(f"xcopy {base_path}\\config {base_path}\\build /e /i /h")
 os.system(f"xcopy {base_path}\\data {base_path}\\build /e /i /h")
 os.system(f"xcopy {base_path}\\themes {base_path}\\build\\themes /e /i /h")
 os.system(f"xcopy {base_path}\\hugo {base_path}\\build /e /i /h")
-os.system(f"xcopy {base_path}\\publish {base_path}\\build /e /i /h")
 
 # 切换目录
 os.chdir(f"{base_path}\\build")
