@@ -30,6 +30,10 @@ links:
     description: ECWU's Notebook
     website: https://ecwuuuuu.com/
     image: https://avatars.githubusercontent.com/u/21114722?v=4
+  - title: WallBreakerNO4
+    description: 你怎么知道我今天吃了三把鸡，上了一千多分
+    website: https://blog.wall-breaker-no4.xyz/
+#    image:   
 menu:
     main: 
         weight: -50
