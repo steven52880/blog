@@ -4,7 +4,7 @@ description: 记录一下在PVE服务器上折腾群晖的过程
 date: 2023-10-03
 lastmod: 2023-10-03
 categories:
-  - 折腾
+  - HomeLab
 tags:
   - PVE
   - NAS
