@@ -33,6 +33,7 @@ links:
   - title: WallBreakerNO4
     description: 你怎么知道我今天吃了三把鸡，上了一千多分
     website: https://blog.wall-breaker-no4.xyz/
+    image: https://image.wall-breaker-no4.xyz/WallBreakerNO4-1024px.png
 #    image:   
 menu:
     main: 
