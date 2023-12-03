@@ -26,13 +26,13 @@ NAT中文名为网络地址转换，简单来说就是传输层上路由器在LA
 - NAT3, Port-Restricted Cone NAT, 端口限制型 NAT
 - NAT4, Symmetric NAT, 对称型 NAT
 
-具体原理参考：https://blog.kaaass.net/archives/1587
+具体原理参考：[https://blog.kaaass.net/archives/1587](https://blog.kaaass.net/archives/1587)
 
 现在家宽路由器PPPoE拨号，拿到的一般就是NAT1。
 
 NAT类型越开放，P2P穿透就越容易成功。FullCone Nat的设备可以和任何其它设备成功建立连接。
 
-可以通过STUN服务器测试自己网络的NAT类型。程序：https://github.com/HMBSbige/NatTypeTester
+可以通过STUN服务器测试自己网络的NAT类型。程序：[https://github.com/HMBSbige/NatTypeTester](https://github.com/HMBSbige/NatTypeTester)
 
 ### ZeroTier的P2P
 
@@ -44,7 +44,7 @@ ZeroTier客户端首先和官方维护的根服务器通信，
 
 ## 搭建Planet
 
-> 摘抄自：https://github.com/Jonnyan404/zerotier-planet/issues/11
+> 摘抄自：[https://github.com/Jonnyan404/zerotier-planet/issues/11](https://github.com/Jonnyan404/zerotier-planet/issues/11)
 >
 > -----
 >
@@ -197,9 +197,9 @@ ZeroTier客户端首先和官方维护的根服务器通信，
 
 在主路由上安装ZeroTier，可以让局域网下所有设备都加入网络，非常方便。
 
-> ZeroTier在OpenWRT的配置路径
+> ZeroTier在Openwrt固件的配置路径
 >
-> - 程序目录: `/etc/config/zero/`
+> - 配置目录: `/etc/config/zero/`
 > - 配置文件：`/etc/config/zerotier`
 
 对于硬路由，可以用Lede源码自编译包含ZeroTier的固件刷入，可以在LUCI Web界面上直接配置
@@ -209,6 +209,16 @@ ZeroTier客户端首先和官方维护的根服务器通信，
 网上有很多教程，这里暂时不详细描述。大概是安装zerotier-one，覆盖planet文件，配置加入网络，新建接口，配置接口防火墙这几步
 
 记得配置防火墙允许`9993`端口的入站连接
+
+Update:
+
+需要注意，Lede固件的配置目录如上所属，官方OP固件则需要在配置文件中添加以下内容以指定ZeroTier配置目录
+
+```
+option config_path '/etc/config/zero'
+```
+
+参考链接：[https://openwrt.org/docs/guide-user/services/vpn/zerotier](https://openwrt.org/docs/guide-user/services/vpn/zerotier)
 
 ## Windows端自动重连
 
