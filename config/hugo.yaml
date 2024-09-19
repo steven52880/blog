@@ -1,8 +1,8 @@
 baseurl: https://blog.steven53.top
 languageCode: zh-cn
 theme: hugo-theme-stack
-paginate: 5
-title: Steven's Blog
+paginate: 10
+title: Steven的笔记本
 copyright: Steven Wu
 
 # Theme i18n support
