@@ -5,7 +5,7 @@ links:
   - title: 黑墨水鱼
     description: 水族馆
     website: https://aquarium39.moe/
-    image: https://aquarium39.moe/images/green_hucfe397aa1f9bbdf54c031f3998449e9a_2721651_2048x0_resize_q75_h2_box.webp
+    image: https://aquarium39.moe/images/green_hu4628925870865328845.webp
   - title: Kirin
     description: Kirin's Backspace
     website: https://9baka.moe/zh/
@@ -17,7 +17,7 @@ links:
   - title: Harkerbest
     description: Try your best,do your best
     website: https://www.harkerbest.cn/
-    image: https://www.harkerbest.cn/wp-content/uploads/2023/07/cropped-%E6%96%B0%E5%A4%B4%E5%83%8F%E5%A3%81%E7%BA%B84x%E4%BF%AE%E5%A4%8D-scaled-1.jpg
+    #image: https://www.harkerbest.cn/wp-content/uploads/2023/07/cropped-%E6%96%B0%E5%A4%B4%E5%83%8F%E5%A3%81%E7%BA%B84x%E4%BF%AE%E5%A4%8D-scaled-1.jpg
   - title: Hao_Tian的折腾日志
     description: 一个兼具日常向和技术向的小站
     website: https://www.haotian22.top/
@@ -34,6 +34,10 @@ links:
     description: 你怎么知道我今天吃了三把鸡，上了一千多分
     website: https://blog.wall-breaker-no4.xyz/
     image: https://image.wall-breaker-no4.xyz/WallBreakerNO4-1024px.png
+  - title: 凛娴的小屋
+    website: https://chrdsite.rinchord.studio/
+    description: 于浩渺星河中，守护一隅温存
+    image: rinchord.jpg
 #    image:   
 menu:
     main: 
