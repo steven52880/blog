@@ -1,5 +1,6 @@
 ---
 title: 【STM32系列教程】0x07 ADC
+slug: 0\x04
 date: 2024-09-15
 categories:
   - STM32系列教程

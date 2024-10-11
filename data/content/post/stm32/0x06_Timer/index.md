@@ -1,5 +1,6 @@
 ---
 title: 【STM32系列教程】0x06 Timer
+slug: STM32-0x06
 date: 2024-09-14
 categories:
   - STM32系列教程

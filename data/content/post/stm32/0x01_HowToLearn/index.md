@@ -1,5 +1,6 @@
 ---
 title: 【STM32系列教程】0x01 如何自学
+slug: STM32-0x01
 date: 2024-09-09
 categories:
   - STM32系列教程

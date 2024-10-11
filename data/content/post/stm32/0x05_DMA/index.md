@@ -1,5 +1,6 @@
 ---
 title: 【STM32系列教程】0x05 DMA
+slug: STM32-0x05
 date: 2024-09-13
 categories:
   - STM32系列教程

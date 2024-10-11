@@ -1,6 +1,8 @@
 ---
 title: 【STM32系列教程】0x03 GPIO
+slug: STM32-0x03
 date: 2024-09-11
+lastmod: 2024-10-12
 categories:
   - STM32系列教程
 tags:
@@ -46,33 +48,6 @@ tags:
 
 最后记得`Generate Code`
 
-### 语法
-
-用到的函数
-
-```c
-// 设置电平
-void HAL_GPIO_WritePin(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin, GPIO_PinState PinState);
-// 翻转电平
-void HAL_GPIO_TogglePin(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin);
-// 读取电平
-GPIO_PinState HAL_GPIO_ReadPin(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin);
-```
-
-函数的参数
-
-- `GPIO_TypeDef* GPIOx` GPIO端口，可取值为：
-  - `GPIO<x>`
-  - `<lable>_GPIO_Port`
-- `uint16_t GPIO_Pin`：引脚在GPIO外设中的编号，可取值为
-  - `GPIO_PIN_<ID>`
-  - `<lable>_Pin`
-- `GPIO_PinState PinState`：高低电平
-  - `GPIO_PIN_RESET`：低电平
-  - `GPIO_PIN_SET`：高电平
-
-> `<lable>`表示之前设置的`User Lable`
-
 ### 代码
 
 我们的代码从`main.c`的`int main()`开始运行。所以在主函数末尾的死循环中添加代码
@@ -101,11 +76,27 @@ GPIO_PinState HAL_GPIO_ReadPin(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin);
 
 - 根据某引脚的高低电平控制LED的亮灭
 
+### 接线
+
+我们使用PB12引脚作为按键输入
+
+如果仅使用STM32核心板：
+
+- 需要手动连接开关。使用开关将PB12引脚和GND之间连接起来。
+
+- 需要<u>额外配置芯片内置的上拉电阻</u>，解释参考文章末尾
+
+  <img src="image-20241012020523622.png" alt="image-20241012020523622" style="zoom:25%;" /> 
+
+扩展板上的按键KEY有外置的上拉，所以用KEY输入的时候选择不上拉/下拉。
+
 ### 配置CubeMX
 
 根据原理图，我们开发板上的KEY按钮连接到`PB12`引脚。
 
 所以和上面同理，把`PB12`引脚设置为`GPIO_Input`，并设置自己喜欢的`User Lable`，这里我使用"`KEY`"。
+
+视具体使用情况，可选配置上拉或者下拉`GPIO Pull-up/Pull down`
 
 ### 代码
 
@@ -129,6 +120,37 @@ GPIO_PinState HAL_GPIO_ReadPin(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin);
 
 ## 其他
 
+### HAL库语法
+
+用到的函数
+
+```c
+// 设置电平
+void HAL_GPIO_WritePin(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin, GPIO_PinState PinState);
+// 翻转电平
+void HAL_GPIO_TogglePin(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin);
+// 读取电平
+GPIO_PinState HAL_GPIO_ReadPin(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin);
+```
+
+函数的参数
+
+- `GPIO_TypeDef* GPIOx` GPIO端口，可取值为：
+  - `GPIO<x>`
+    比如`GPIOA`, `GPIOB`
+  - `<lable>_GPIO_Port`
+    比如`LED_GPIO_Port`, `KEY_GPIO_Port`
+- `uint16_t GPIO_Pin`：引脚在GPIO外设中的编号，可取值为：
+  - `GPIO_PIN_<ID>`
+    `GPIO_PIN_0`, `GPIO_PIN_1`
+  - `<lable>_Pin`
+    比如`LED_Pin`, `Key_Pin`
+- `GPIO_PinState PinState`：高低电平
+  - `GPIO_PIN_RESET`：低电平
+  - `GPIO_PIN_SET`：高电平
+
+> `<lable>`表示之前设置的`User Lable`，填写UserLable后再Generate Code，CubeMX会自动在文件里生成对应名称的宏，用起来较为方便
+
 ### 额外任务
 
 可以自己尝试用按钮和灯实现一些功能，比如按下按钮点亮灯一秒再熄灭。
@@ -140,15 +162,16 @@ GPIO_PinState HAL_GPIO_ReadPin(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin);
 对输出引脚，有以下配置：
 
 - GPIO output level: 默认输出的电平
-- GPIO mode: 输出模式推挽/开漏，用不着但这里有详细的解释：https://www.bilibili.com/video/BV1D84y1c7GV/
-- GPIO Pull-up/Pull-down: 内置上下拉，用不着
+- GPIO mode: 输出模式推挽/开漏
+- GPIO Pull-up/Pull-down: 内置上下拉
 - Maximum output speed: 切换速度，如果要高速率IO口可以选择High，点灯这种就无所谓了
 - User Lable: 用户标签
 
 对输入引脚，有以下配置：
 
-- GPIO Pull-up/Pull-down: 内置上下拉，这里有详细的解释：https://www.bilibili.com/video/BV1Kb411o7ai/
+- GPIO Pull-up/Pull-down: 内置上下拉
 - User Lable: 用户标签
 
-我们的开发板有外置的上拉，所以用KEY的时候选择不上拉/下拉
+> - 关于推挽/开漏： https://www.bilibili.com/video/BV1D84y1c7GV/
+> - 关于上拉/下拉： https://www.bilibili.com/video/BV1Kb411o7ai/
 

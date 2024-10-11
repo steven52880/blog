@@ -17,7 +17,6 @@ links:
   - title: Harkerbest
     description: Try your best,do your best
     website: https://www.harkerbest.cn/
-    #image: https://www.harkerbest.cn/wp-content/uploads/2023/07/cropped-%E6%96%B0%E5%A4%B4%E5%83%8F%E5%A3%81%E7%BA%B84x%E4%BF%AE%E5%A4%8D-scaled-1.jpg
   - title: Hao_Tian的折腾日志
     description: 一个兼具日常向和技术向的小站
     website: https://www.haotian22.top/
@@ -38,6 +37,16 @@ links:
     website: https://chrdsite.rinchord.studio/
     description: 于浩渺星河中，守护一隅温存
     image: rinchord.jpg
+  - title: zlicdt
+    description: なに？？
+    website: https://zlicdt.github.io
+    image: https://zlicdt.github.io/img/avatar.png
+  - title: 特倫蘇的日與夜
+    website: https://blog.cklau.cc/
+    image: https://32cf906.webp.li/2024/08/GHMGBA.jpg
+  - title: 
+    website: https://www.yhi.moe/
+    
 #    image:   
 menu:
     main: 

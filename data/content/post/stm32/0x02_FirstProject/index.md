@@ -1,6 +1,8 @@
 ---
 title: 【STM32系列教程】0x02 第一个项目
+slug: STM32-0x02
 date: 2024-09-10
+lastmod: 2024-10-12
 categories:
   - STM32系列教程
 tags:
@@ -57,15 +59,20 @@ tags:
 
 1. 申请Jetbrains教育优惠，[申请链接](https://www.jetbrains.com/shop/eform/students)
 2. 安装`Clion`，[下载链接](https://www.jetbrains.com/clion/download)
-3. 安装`STM32CubeMX`，[下载链接](https://www.st.com/en/development-tools/stm32cubemx.html#get-software)，会给你发带链接的邮件
-4. 安装`gcc-arm-none-eabi`并确保添加到系统Path，[下载链接](https://developer.arm.com/downloads/-/gnu-rm)
-5. 安装`OpenOCD`并确保添加到系统Path，[下载链接](https://github.com/xpack-dev-tools/openocd-xpack/releases)
+3. 安装`STM32CubeMX`，[下载链接](https://www.st.com/en/development-tools/stm32cubemx.html#get-software)，<u>务必注册ST帐号</u>，会给你发带下载链接的邮件
+4. 安装`arm-none-eabi-gcc`并确保<u>添加到系统Path</u>，[下载链接](https://developer.arm.com/downloads/-/gnu-rm)
+5. 安装`OpenOCD`并确保<u>添加到系统Path</u>，[下载链接](https://github.com/xpack-dev-tools/openocd-xpack/releases)
 
 > 注意：
 >
 > - 从现在开始，挂上你的科学上网吧
 > - 下载文件名称可能很长。请选择系统带win字样的（系统），同时架构带x64/x86_64字样的（CPU架构）
 > - 如何添加到系统Path请自行搜索解决
+
+> Update 20241001：
+>
+> - 注意CubeMX使用过程中会联网，请在上方Help > Updater Settings内配置代理选项
+> - 最新版本OpenOCD发布的压缩文件中，`script`文件夹被挪到子文件夹中了，如果CLion提示无法识别到OpenOCD，可以尝试将其移动到上一级文件夹。
 
 ## 开发板介绍
 
@@ -129,14 +136,14 @@ CubeMX新建工程时会提示选择芯片。
 
 **基础配置**
 
-打开Clock Cofiguration页面，如图配置时钟，一般需要配置划红线的地方
-
-<img src="image-20230729223711142.png" alt="image-20230729223711142" style="zoom: 33%;" /> 
-
 打开`Pinout & Configuration`页面，配置部分外设：
 
 - `System Core` -> `RCC` -> `HSE`选`Crystal/Ceramic Resonator`
 - `System Core` -> `SYS` -> `Debug`选`Serial Wire`
+
+打开Clock Cofiguration页面，如图配置时钟，一般需要配置划红线的地方
+
+<img src="image-20230729223711142.png" alt="image-20230729223711142" style="zoom: 33%;" /> 
 
 打开`Project Manager`页面，配置工程：
 
@@ -162,15 +169,16 @@ CubeMX新建工程时会提示选择芯片。
 
 **配置调试器**
 
-在右上角target框选编辑配置，新建`OpenOCD下载并运行`
+> - 右上角的**”运行目标选择“框**可以选择将要执行的操作，包括两种：
+>   - **“CMake应用程序”**：这种是在CMake配置文件（`CMakeList.txt`）中定义的目标（可执行文件），这种目标在<u>加载CMake配置文件</u>时会自动生成
+>   - **“OpenOCD下载并运行”**：这种我们平时使用的目标，它会先调用CMake编译好指定的可执行文件，再调用OpenOCD并应用<u>面板配置文件</u>将可执行文件下载到芯片上
+> - **“面板配置文件”**是OpenOCD的配置文件，用以告诉OpenOCD使用哪一种下载器、使用哪一种下载接口、下载到什么样的芯片上。
 
-选择CMake编译出来的二进制文件作为目标和OpenOCD调试用的“面板配置文件”
+在右上角的”运行目标选择“框，选择编辑配置，新建`OpenOCD下载并运行`
 
-> - target框可以选择现在通过哪一种配置文件运行
-> - target类型包括：“CMake应用程序”（调用CMake编译）或“OpenOCD下载并运行”（CMake编译并用OpenOCD下载）
-> - “CMake应用程序”会自动加载所有CMakeLists.txt中的target和library
-> - “OpenOCD下载并运行”需要选择待编译的CMake Target，OpenOCD当前使用的的下载和调试参数称为“**面板配置文件**”
-> - 平时要刷固件，只用”OpenOCD下载并运行“，因为它会先调用CMake编译，再调用OpenOCD读取面板配置文件进行下载
+- 将<u>“目标”</u>和<u>“可执行的二进制文件”</u>选择为CMake编译出来的.elf文件（可以在STM32上运行的文件）
+
+- 新建一个配置文件，作为提供给OpenOCD的<u>“面板配置文件”</u>
 
 这里提供几个我们用到的“面板配置文件”：
 
@@ -202,13 +210,66 @@ CubeMX新建工程时会提示选择芯片。
 
 ### 连接下载器
 
-我们使用SWD调试，一般为四条线：DIO, CLK, VCC, GND
+我们使用SWD调试，一般为四条线：
+
+- DIO/TMS
+- CLK/TCK
+- VCC/3V3
+- GND
 
 根据板子和下载器上印刷的字连接这四条线
 
 ### 下载和运行
 
 编译/运行/调试图标都在右上角
+
+在”CMake“一栏应当提示"`Build files have been written to: ...`"，这意味着编译器配置正确，CMake能正常生成编译指令文件
+
+在”消息“一栏应当提示"`构建 已完成`"，这意味着固件已经成功编译
+
+在”运行“一栏提示"`Programming Finished`"，着意味着固件已经被下载到芯片中
+
+<img src="image-20241012003703255.png" alt="image-20241012003703255" style="zoom:50%;" />
+
+### FAQ 常遇到的错误
+
+遇到问题，请先检查以下几点：
+
+- 启动cmd”命令提示符“，运行`arm-none-eabi-gcc`和`openocd`指令，检查PATH环境变量是否成功配置
+- 配置完PATH之后需要重启
+- 检查环境目录和用户目录是否为<u>全英文路径</u>，是否有写入权限
+
+  
+
+**Clion右上角没有可以选择的”CMake应用程序“**
+
+检查CLion左侧或者下方的<u>三角形CMake标志</u>，观察是否出现任何CMake生成错误
+
+如果没有`CMakeList.txt`文件，重启CLion，它会重新尝试识别STM32CubeMX项目并生成`CMakeList.txt`文件
+
+  
+
+**编译成功，但是链接的时候在`STM32F103C8Tx_FLASH.ld`文件报错：`non constant or forward reference address expression for section .ARM.extab`**
+
+旧版的gcc编译器无法识别`(READONLY)`符号，请将文档中的"`(READONLY) `"（注意包含后面的一个空格）删掉即可
+
+  
+
+**`Error: unable to find a matching CMSIS-DAP device`**
+
+OpenOCD和下载器连接失败，请检查<u>下载器和电脑的连接</u>，以及OpenOCD的<u>面板配置文件</u>
+
+  
+
+**`Error: Error connecting DP: cannot read IDR`**
+
+下载器和开发板连接失败，请检查<u>下载器和开发板的连接</u>，以及OpenOCD的<u>面板配置文件</u>
+
+  
+
+**固件刷写成功，但是程序似乎没有运行**
+
+在刷写程序后或者调试开始时，有的时候需要手动按下开发板上的Reset按钮重启
 
 ## 工程结构介绍
 
@@ -229,7 +290,7 @@ CubeMX新建工程时会提示选择芯片。
 
 CubeMX通过类似于`/* USER CODE ...... */`这种注释掉的符号来识别哪些代码是用户写的，哪些是它生成的。
 
-对于CubeMX生成的文件，你只可以在一对`/* USER CODE BEGIN ....*/`和`/* USER CODE END ....*/`之间添加代码，CubeMX会**在下一次生成代码时把其余地方重置**。
+对于CubeMX生成的文件，你只可以在一对`/* USER CODE BEGIN ....*/`和`/* USER CODE END ....*/`之间添加代码，在这些标志之间的代码称为<u>用户代码</u>。其余地方的代码成为<u>系统代码</u>，CubeMX会**在下一次生成代码时把系统代码重置**。
 
 ```c
   /* USER CODE BEGIN WHILE */
