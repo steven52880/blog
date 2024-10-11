@@ -87,9 +87,10 @@ ul p, ol p {
     --blockquote-background-color: rgb(75, 65, 65) !important;
 }
 
-.article-page .main-article .article-content { /*文段前空当*/
+/*文段前空当*/
+/* .article-page .main-article .article-content { 
     margin:0!important;
-}
+} */
 
 /*h1,
 h2,
