@@ -92,6 +92,10 @@ ul p, ol p {
     margin:0!important;
 } */
 
+.article-footer {
+    margin-top: 1em !important;
+}
+
 /*h1,
 h2,
 h3,

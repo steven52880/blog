@@ -1,5 +1,6 @@
 ---
-title: 【STM32系列教程】0x04 中断机制
+title: 【STM32系列教程】0x04 外部中断
+description: 让外部中断解放CPU...
 slug: STM32-0x04
 date: 2024-09-12
 lastmod: 2024-10-12

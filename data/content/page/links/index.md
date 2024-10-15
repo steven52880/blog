@@ -44,8 +44,9 @@ links:
   - title: 特倫蘇的日與夜
     website: https://blog.cklau.cc/
     image: https://32cf906.webp.li/2024/08/GHMGBA.jpg
-  - title: 
+  - title: Hello from Junde Yhi
     website: https://www.yhi.moe/
+    description: This is Junde Yhi’s personal website.
     
 #    image:   
 menu:

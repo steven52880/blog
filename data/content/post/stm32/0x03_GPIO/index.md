@@ -1,5 +1,6 @@
 ---
 title: 【STM32系列教程】0x03 GPIO
+description: 使用HAL库驱动GPIO进行输入输出！从点亮一颗STM32开始的电控生活（bushi
 slug: STM32-0x03
 date: 2024-09-11
 lastmod: 2024-10-12

@@ -1,5 +1,6 @@
 ---
 title: 【STM32系列教程】0x02 第一个项目
+description: 扔掉难用的礦ision叭！快来使用现代化的 CubeMX / CMake / GCC / Clion / OpenOCD 轻松进行STM32开发！
 slug: STM32-0x02
 date: 2024-09-10
 lastmod: 2024-10-12
