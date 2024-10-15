@@ -159,6 +159,8 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 
 不可以在回调函数中执行耗时的操作！比如等待 (`HAL_Delay`)或者大量的计算
 
+本章最开始有说明，<u>相同ID不同Port之间的Pin只能选择一个连接到EXTI</u>。所以在回调函数中不能分辨外部中断来自哪一个Port。
+
 **关于Volatile**
 
 这一点在后面才会使用得到，但是在这里提前说明。

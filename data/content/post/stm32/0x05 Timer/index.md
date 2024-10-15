@@ -1,23 +1,16 @@
 ---
-title: 【STM32系列教程】0x06 Timer
-slug: STM32-0x06
-date: 2024-09-14
+title: 【STM32系列教程】0x05 Timer
+#description: 
+slug: STM32-0x05
+date: 2024-10-15
+#lastmod: 2024-10-12
 categories:
   - STM32系列教程
 tags:
   - STM32
-draft: true
 ---
 
 ## 介绍
-
-### 自学文档
-
-> 原理这里就不详细写了，自己去看教程
->
-> - 定时器简介：https://www.bilibili.com/video/BV1th411z7sn?p=13
-> - PWM和输出比较功能：https://www.bilibili.com/video/BV1th411z7sn?p=15
-> - 另一篇文字教程：https://deepbluembedded.com/stm32-pwm-example-timer-pwm-mode-tutorial/
 
 ### Timer是什么
 
@@ -26,6 +19,12 @@ draft: true
   - 在到时间时触发更新中断，调用特定的程序代码
   - 在到时间时发生更新事件，触发特定的硬件功能
   - 利用比较功能输出任意占空比和频率的方波
+
+> 原理这里就不详细写了，自己去看教程
+>
+> - 定时器简介： https://www.bilibili.com/video/BV1th411z7sn?p=13
+> - PWM和输出比较功能： https://www.bilibili.com/video/BV1th411z7sn?p=15
+> - 另一篇文字教程： https://deepbluembedded.com/stm32-pwm-example-timer-pwm-mode-tutorial/
 
 ### Timer外设
 
@@ -61,7 +60,7 @@ draft: true
 
 `TIMx_CN` == `TIMx_ARR` 时，自动清零`TIMx_CN`，重新开始计数
 
-> 相当于 `for (int i=0; i<=TIMx_ARR; i++)`
+> 相当于 `for (int TIMx_CN=0; TIMx_CN<=TIMx_ARR; TIMx_CN++)`
 >
 > 由于从0开始计数，注意<u>需要计数n次时`TIMx_ARR`=n-1</u>
 
@@ -150,9 +149,9 @@ htimn.Instance->CCRm;
 
 ## 实践1: 定时器触发中断
 
-> 视频教程：https://www.bilibili.com/video/BV1th411z7sn?p=13
+> 视频教程： https://www.bilibili.com/video/BV1th411z7sn?p=13
 >
-> 文字教程：https://deepbluembedded.com/stm32-counter-mode-example-frequency-counter-timer-in-counter-mode/
+> 文字教程： https://deepbluembedded.com/stm32-counter-mode-example-frequency-counter-timer-in-counter-mode/
 
 ### 提供的中断
 
@@ -186,7 +185,7 @@ TIM中断到达NVIC后，将会调用`Core/Src/stm32f1xx_it.c`中的**特定定�
 
 > - 有的定时器只提供一个总的中断进入NVIC，所以`stm32f1xx_it`中只有一个总的`TIMx_IRQHandler`函数，
 > - 有的定时器每种类型的中断分别进入NVIC，所以`stm32f1xx_it`中有很多分的`TIMx_xx_IRQHandler`函数
-> - 以前使用LL库开发时，在此文件中手动设置各种寄存器并实现应用逻辑。现在使用HAL库就不用在这里面写代码了。
+> - 以前使用LL库开发时，在`stm32f1xx_it`文件中手动设置各种寄存器并实现应用逻辑。现在使用HAL库就不用在这里面写代码了。
 
 ```mermaid
 flowchart LR
@@ -276,7 +275,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 
 ### 目标
 
-用核心板板载led实现呼吸灯，即缓慢电量缓慢熄灭不断循环
+用核心板板载led实现呼吸灯，即缓慢点亮缓慢熄灭不断循环
 
 ### 原理
 
@@ -299,16 +298,16 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 配置`TIM1`以及它的`Channel2`：
 
 - 最左侧外设列表 Timers -> TIM1 -> 中间上方Mode
-  - Clock Source 选择Internal Clock （配置时钟源）
-  - Channel2 选择PWM Generation CH2 （配置通道信息）
+  - `Clock Source` 选择`Internal Clock` （配置时钟源）
+  - `Channel2` 选择`PWM Generation CH2` （配置通道信息）
 
 - 最左侧外设列表 Timers -> TIM1 -> 中间下方Configuration -> Parameter Settings页面
   - Counter Settings
-    - 设置Prescaler （配置预分频器）
-    - 设置Conter Period （配置重装载寄存器）
+    - 设置`Prescaler` （配置预分频器）
+    - 设置`Conter Period` （配置重装载寄存器）
 
   - PWM Generation Channel 2
-    - Pulse （这个是配置比较寄存器，这里不做设置，会在代码中动态修改）
+    - `Pulse` （这个是配置比较寄存器，这里不做设置，会在代码中动态修改）
 
 
 预分频器、重装载寄存器和比较寄存器的值请尝试自行计算。
@@ -390,12 +389,12 @@ freq = 440*pow(2,(midikey-69)/12.0);
 配置`TIM1`以及它的`Channel1`：
 
 - 最左侧外设列表 Timers -> TIM1 -> 中间上方Mode 
-  - Clock Source 选择Internal Clock
-  - Channel1 选择PWM Generation CH1
+  - Clock Source 选择`Internal Clock`
+  - Channel1 选择`PWM Generation CH1`
 - 左侧外设列表 Timers -> TIM1 -> 中间下方Configuration -> Parameter Settings页面
-  - Counter Settings -> 设置Prescaler 预分频器
-  - Counter Settings -> Conter Period 重装载寄存器，这里不做设置在代码中修改
-  - PWM Generation Channel 1 -> Pulse 比较寄存器，这里不做设置在代码中修改
+  - Counter Settings -> 设置`Prescaler` 预分频器
+  - Counter Settings -> `Conter Period` 重装载寄存器，这里不做设置在代码中修改
+  - PWM Generation Channel 1 -> `Pulse` 比较寄存器，这里不做设置在代码中修改
 
 我在Prescaler中填入了72-1，在预分频后可以得到1MHz的频率，通过在程序中动态改变重装载寄存器的值，可以获得15Hz以上的音高
 
@@ -465,7 +464,7 @@ void singtone(int midikey, int time)
 ### 参考文档
 
 > - Timer文档：AN4013 Introduction to timers for STM32 MCUs
->  https://www.st.com/resource/en/application_note/an4013-introduction-to-timers-for-stm32-mcus-stmicroelectronics.pdf
+>    https://www.st.com/resource/en/application_note/an4013-introduction-to-timers-for-stm32-mcus-stmicroelectronics.pdf
 
 ### 输入输出源的选择
 
@@ -554,7 +553,7 @@ __weak void HAL_TIM_TriggerCallback (TIM_HandleTypeDef *htim);
 __weak void HAL_TIM_ErrorCallback (TIM_HandleTypeDef *htim);
 ```
 
-> https://os.mbed.com/teams/Senior-Design-Sound-Monitor/code/STM32L4xx_HAL_Driver/docs/tip/group__TIM__Exported__Functions__Group9.html
+>  https://os.mbed.com/teams/Senior-Design-Sound-Monitor/code/STM32L4xx_HAL_Driver/docs/tip/group__TIM__Exported__Functions__Group9.html
 
 
 

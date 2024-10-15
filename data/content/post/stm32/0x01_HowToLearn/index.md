@@ -58,7 +58,7 @@ STM32有多种开发方式，我们使用STM32Cube和HAL库开发，网上找资
 
 - [B站](https://bilibili.com)
 - [Google](https://google.com)
-- [Youtub](https://youtube.com)
+- [Youtube](https://youtube.com)
 
 ### 关于解决报错和bug
 
