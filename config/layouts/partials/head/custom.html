@@ -4,3 +4,7 @@
 {{ range .Site.Params.customjs }}
 <script type="text/javascript" src="{{ . | absURL }}"></script>
 {{- end }}
+
+{{- if .Params.noindex }}
+<meta name="robots" content="noindex,noarchive">
+{{ end }}
