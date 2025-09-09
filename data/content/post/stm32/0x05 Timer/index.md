@@ -3,7 +3,7 @@ title: 【STM32系列教程】0x05 Timer
 #description: 
 slug: STM32-0x05
 date: 2024-10-15
-#lastmod: 2024-10-12
+lastmod: 2025-09-10
 categories:
   - STM32系列教程
 tags:
@@ -16,9 +16,9 @@ tags:
 
 - 可配置的硬件定时器
 - 常用的功能：
-  - 在到时间时触发更新中断，调用特定的程序代码
-  - 在到时间时发生更新事件，触发特定的硬件功能
-  - 利用比较功能输出任意占空比和频率的方波
+    - 在到时间时触发更新中断，调用特定的程序代码
+    - 在到时间时发生更新事件，触发特定的硬件功能
+    - 利用比较功能输出任意占空比和频率的方波
 
 > 原理这里就不详细写了，自己去看教程
 >
@@ -46,19 +46,25 @@ tags:
 
 ### 如何计时
 
+**时钟**
+
+以STM32F103为例：
+
+1. 时钟输入源：选择"内部时钟"时，来源于时钟树的 APBx Timer clocks（不同的定时器会分别挂载在APB1/APB2下）
+2. 时钟经过<u>预分频器</u>，频率变为输入源的 `1/(PSC+1)`
+3. 时钟进入<u>时基单元</u>，进行计数。计数达到上限时，清零计数器，重新开始计数
+
 **三个寄存器**
 
 - 预分频寄存器 `TIMx_PSC`（Prescaler, 频率系数）
 - 自动重装载寄存器 `TIMx_ARR` （Auto Reload Register, 计数上限）
-- 计数器寄存器 `TIMx_CN`（Count, 计数变量）
+- 计数器寄存器 `TIMx_CN`（Counter, 计数变量）
 
 **计数过程**
 
-`TIMx_PSC`表示预分频器将输入频率变慢到几分之一
-
-分频后的每个周期，`TIMx_CN`向上计数
-
-`TIMx_CN` == `TIMx_ARR` 时，自动清零`TIMx_CN`，重新开始计数
+1. `TIMx_PSC`表示预分频器将输入频率变慢到几分之一
+2. 分频后的每个周期，`TIMx_CN`向上计数
+3. `TIMx_CN` == `TIMx_ARR` 时产生溢出。清零`TIMx_CN`，重新从0开始计数
 
 > 相当于 `for (int TIMx_CN=0; TIMx_CN<=TIMx_ARR; TIMx_CN++)`
 >
@@ -97,7 +103,7 @@ $频率 = \frac{输入源频率} {(预分频器系数 \times 计数上限)}$
 HAL_StatusTypeDef HAL_TIM_Base_Start(TIM_HandleTypeDef *htim);
 HAL_StatusTypeDef HAL_TIM_Base_Stop(TIM_HandleTypeDef *htim);
 
-// 开始/停止定时器时基单元，并允许所有的中断
+// 开始/停止定时器时基单元，并允许相关的中断
 HAL_StatusTypeDef HAL_TIM_Base_Start_IT(TIM_HandleTypeDef *htim);
 HAL_StatusTypeDef HAL_TIM_Base_Stop_IT(TIM_HandleTypeDef *htim);
     
@@ -173,7 +179,7 @@ htimn.Instance->CCRm;
 
 ToDo
 
-### 代码调用层次
+### 代码调用层次 *
 
 > 为了能让大家更加熟悉STM32的中断功能，这里再用Timer描述一遍中断的发生过程，介绍后面的外设时就不再描述了
 

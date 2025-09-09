@@ -3,7 +3,7 @@ title: 【STM32系列教程】0x04 外部中断
 description: 让外部中断(EXTI)解放CPU，避免无止境的主循环轮询！
 slug: STM32-0x04
 date: 2024-09-12
-lastmod: 2024-10-12
+lastmod: 2025-09-10
 categories:
   - STM32系列教程
 tags:
@@ -33,14 +33,19 @@ EXTI外部中断主要用于在引脚的电平改变时产生中断，避免轮�
 
 <img src="image-20230802051530034.png" alt="image-20230802051530034" style="zoom:50%;" /> 
 
-- 每个 GPIO Port 连接了16个 GPIO Pin
-- 所有 GPIO Port 接到AFIO上，AFIO在ID相同Port不同的Pin之间选择，相同ID不同Port之间的Pin只能选择一个连接到EXTI
-- 边沿改变 或 触发代码 触发EXTI，把触发的来源记录到请求挂起寄存器
-- EXTI 产生 通往NVIC的中断 或 通往其它外设的事件驱动其他外设产生动作
-- 由于资源不足，部分EXTI通往NVIC的引脚被合并，NVIC无法分辨中断来自哪个具体引脚
-- 最后NVIC中断CPU，调用中断函数
+外设和物理连接
 
-### 中断的产生过程
+- AFIO（中断引脚选择）
+  - 每个 GPIO Port 连接了16个 GPIO Pin。
+  - 所有 GPIO Port 接到AFIO上，<u>AFIO在Port不同ID相同的Pin之间选择，相同ID的Pin只能选择一个连接到EXTI</u>
+- EXTI（边沿检测）
+  - 边沿改变时触发EXTI，它会记录触发的来源
+  - EXTI 产生 通往NVIC的中断 或 通往其它外设的事件驱动其他外设产生动作
+- NVIC（中断控制器）
+  - 由于资源不足，部分EXTI通往NVIC的引脚被合并，NVIC无法分辨中断来自哪个具体引脚
+  - 中断CPU，调用中断函数
+
+### 中断的产生过程 *（了解即可）
 
 > 该部分需要一定的”计算机结构“相关的知识
 
@@ -177,7 +182,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 volatile int num;
 ```
 
-### 代码调用层次
+### 代码调用层次 *
 
 1. 在STM32中，中断请求由外设发出到达NVIC指定中断通道，NVIC中断CPU并调用`Core/Src/stm32f1xx_it.c`中**对应通道的中断函数**`xxx_IRQHandler`
 2. 同一外设的`xxx_IRQHandler`调用`stm32f1xx_hal_xxx.c`中**同一个寄存器处理函数**`HAL_xxx_IRQHandler`，让HAL库处理寄存器

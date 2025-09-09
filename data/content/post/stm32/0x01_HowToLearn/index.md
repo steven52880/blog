@@ -3,6 +3,7 @@ title: 【STM32系列教程】0x01 如何自学
 description: 最重要的一集！最棒的STM32的自学资料和自学方法~
 slug: STM32-0x01
 date: 2024-09-09
+lastmod: 2025-09-10
 categories:
   - STM32系列教程
 tags:
@@ -60,26 +61,27 @@ STM32有多种开发方式，我们使用STM32Cube和HAL库开发，网上找资
 - [Google](https://google.com)
 - [Youtube](https://youtube.com)
 
-### 关于解决报错和bug
+### 如何通过网络获取想要的知识
 
-如果遇到不能解决的问题，你可以在论坛上提问。[Stack Overflow](https://stackoverflow.com/)是知名计算机论坛，包含各种疑难杂症的帖子，有无法解决的问题可以在上面提问
+[【RM论坛】线上取经指南](https://bbs.robomaster.com/article/810113)
 
-《提问的智慧》原文链接：[How to Ask Questions The Smart Way （zh_CN）](https://github.com/ryanhanwu/How-To-Ask-Questions-The-Smart-Way/blob/main/README-zh_CN.md)
+[【RM论坛】提问的（RM版本）](https://bbs.robomaster.com/article/810096)  
+原文链接：[How to Ask Questions The Smart Way （zh_CN）](https://github.com/ryanhanwu/How-To-Ask-Questions-The-Smart-Way/blob/main/README-zh_CN.md)
 
-**很值得看**！
+**请务必阅读**！
 
 简单概括一下，
 
 - 提问之前：
-  - 仔细读一读**官方文档**，检查教程是否遗漏步骤，看看FAQ有没有你遇到的问题
-  - **谷歌**搜索，**多看论坛里的帖子**，别人大概率也遇到过同样问题
-  - 不要提出[不该问的问题](https://github.com/ryanhanwu/How-To-Ask-Questions-The-Smart-Way/blob/main/README-zh_CN.md#%E4%B8%8D%E8%AF%A5%E9%97%AE%E7%9A%84%E9%97%AE%E9%A2%98)
+    - 仔细读一读**官方文档**，检查教程是否遗漏步骤，看看FAQ有没有你遇到的问题
+    - **谷歌**搜索，**多看论坛里的帖子**，别人大概率也遇到过同样问题
+    - 不要提出[不该问的问题](https://github.com/ryanhanwu/How-To-Ask-Questions-The-Smart-Way/blob/main/README-zh_CN.md#%E4%B8%8D%E8%AF%A5%E9%97%AE%E7%9A%84%E9%97%AE%E9%A2%98)
 - 提问的时候
-  - 描述**运行环境**（硬件配置、操作系统、软件版本号）
-  - 描述**所做的操作**，最好是能复现问题的操作
-  - 描述诊断测试/**诊断步骤**
-  - 描述提问前是如何去研究和理解这个问题的。
-  - 提供报错信息和**log**
+    - 描述**运行环境**（硬件配置、操作系统、软件版本号）
+    - 描述**所做的操作**，最好是能复现问题的操作
+    - 描述诊断测试/**诊断步骤**
+    - 描述提问前是如何去研究和理解这个问题的。
+    - 提供报错信息和**log**
 
 ### 关于ChatGPT
 
