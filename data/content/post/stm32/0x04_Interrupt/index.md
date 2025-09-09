@@ -1,6 +1,6 @@
 ---
 title: 【STM32系列教程】0x04 外部中断
-description: 让外部中断解放CPU...
+description: 让外部中断(EXTI)解放CPU，避免无止境的主循环轮询！
 slug: STM32-0x04
 date: 2024-09-12
 lastmod: 2024-10-12
@@ -95,6 +95,10 @@ flowchart LR
     ... --> HAL_GPIO_EXTI_IRQHandler
     HAL_GPIO_EXTI_IRQHandler --> HAL_GPIO_EXTI_Callback
 ```
+
+> 这部分HAL库函数调用逻辑在ST官方教程上也有说明。
+>
+> https://wiki.stmicroelectronics.cn/stm32mcu/wiki/Getting_started_with_EXTI#HAL_Library_workflow_summary
 
 ## 实践: 外部触发中断
 

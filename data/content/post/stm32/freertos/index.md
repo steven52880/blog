@@ -1,6 +1,6 @@
 ---
 title: FreeRTOS入门记录
-description: 在ESP32-Arduino或者STM32上开始超级简单的FreeRTOS开发！简单介绍任务是怎么调度的、任务间通过什么来通信和协作
+description: 在ESP32-Arduino或者STM32上开始超级简单的FreeRTOS开发！来自DigiKey的视频教程，介绍单片机中的各种任务是怎么调度的、任务间通过什么来通信和协作
 slug: freertos
 date: 2024-10-25
 #lastmod: 2024-10-12

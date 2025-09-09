@@ -368,7 +368,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 
 ### 原理
 
-通过Timer输出**PWM**波形，修改波形**频率**以改变蜂鸣器的音高。
+通过Timer输出方波，修改波形**频率**以改变蜂鸣器的音高。
 
 440hz为音符A5的频率，可以先尝试只发出一个音符
 

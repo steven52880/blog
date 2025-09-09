@@ -1,14 +1,14 @@
 ---
 title: 【STM32系列教程】0x07 ADC
-slug: 0\x04
-date: 2024-09-15
+# description: 介绍STM32的ADC外设！从简单的单次转换，到复杂的TIM触发规则模式转换并用DMA搬运数据。
+slug: STM32-0x07
+date: 2024-11-08
+#lastmod: 2024-10-12
 categories:
   - STM32系列教程
 tags:
   - STM32
-draft: true
 ---
-
 ## 介绍
 
 ### ADC是什么
@@ -127,7 +127,7 @@ Todo...
 
 **内部温度传感器**
 
-需要满足采样时间大于某个特定值
+需要满足采样时间T~S_temp~大于某个特定值
 
 以下是<u>STM32F4xx reference manual</u>(RM0090)中给出的公式，其它系列芯片的公式会有所不同
 
@@ -252,7 +252,7 @@ HAL_ADC_Stop_DMA();
         - 启用`DMA Continuous Requests`，因为希望每一轮读取都需要通过DMA搬运数据
       - `ADC_Regular_ConversionMode`
         - `Number Of Conversion` 根据需要选择，我选择为4
-        - `External Trigger Conversion Source`⚠ 选择`Timer x Trigger Out event`，使用Timer x 的TRGO信号触发。我使用TIM2
+        - `External Trigger Conversion Source` ⚠选择`Timer x Trigger Out event`，使用Timer x 的TRGO信号触发。我使用TIM2
         - 根据需要配置每个Rank的数据
 
 配置TIM频率和TRGO信号
