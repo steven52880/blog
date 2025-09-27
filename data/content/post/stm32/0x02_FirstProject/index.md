@@ -75,6 +75,9 @@ tags:
 > - 注意CubeMX使用过程中会联网，请在上方Help > Updater Settings内配置代理选项
 > - 最新版本OpenOCD发布的压缩文件中，`script`文件夹被挪到子文件夹中了，如果CLion提示无法识别到OpenOCD，可以尝试将其移动到上一级文件夹。
 
+> Update 20250927
+> - Mac用户可以使用这条homebrew命令安装编译器：`brew install --cask gcc-arm-embedded`
+
 ## 开发板介绍
 
 开发板的需要关注的两个点：核心芯片，外围设备/接口的引脚分配
@@ -232,6 +235,9 @@ CubeMX新建工程时会提示选择芯片。
 
 <img src="image-20241012003703255.png" alt="image-20241012003703255" style="zoom:50%;" />
 
+> Update 20250928
+> 新版本的CLion新增了对STLink的支持，我们使用Daplink，所以在顶部需要选择原生（Native）的选项
+
 ### FAQ 常遇到的错误
 
 遇到问题，请先检查以下几点：
@@ -240,39 +246,42 @@ CubeMX新建工程时会提示选择芯片。
 - 配置完PATH之后需要重启
 - 检查环境目录和用户目录是否为<u>全英文路径</u>，是否有写入权限
 
+**Q: 下载代码时Error:Debig Adapter has to be specified, see "adapter driver" command**
   
+我也不知道怎么回事
 
-**Clion右上角没有可以选择的”CMake应用程序“**
+
+**Q: Clion右上角没有蓝色的”CMake应用程序“**
 
 检查CLion左侧或者下方的<u>三角形CMake标志</u>，观察是否出现任何CMake生成错误
 
-如果没有`CMakeList.txt`文件，重启CLion，它会重新尝试识别STM32CubeMX项目并生成`CMakeList.txt`文件
-
+如果没有`CMakeList.txt`文件，关闭CLion，删除工程目录下的`.idea`文件夹，再打开，它会重新尝试识别STM32CubeMX项目并生成`CMakeList.txt`文件
   
 
-**编译成功，但是链接的时候在`STM32F103C8Tx_FLASH.ld`文件报错：`non constant or forward reference address expression for section .ARM.extab`**
+**Q: 编译成功，但是链接的时候在`STM32F103C8Tx_FLASH.ld`文件报错：`non constant or forward reference address expression for section .ARM.extab`**
 
 旧版的gcc编译器无法识别`(READONLY)`符号，请将文档中的"`(READONLY) `"（注意包含后面的一个空格）删掉即可
 
   
 
-**`Error: unable to find a matching CMSIS-DAP device`**
+**Q: `Error: unable to find a matching CMSIS-DAP device`**
 
 OpenOCD和下载器连接失败，请检查<u>下载器和电脑的连接</u>，以及OpenOCD的<u>面板配置文件</u>
 
   
 
-**`Error: Error connecting DP: cannot read IDR`**
+**Q: `Error: Error connecting DP: cannot read IDR`**
 
 下载器和开发板连接失败，请检查<u>下载器和开发板的连接</u>，以及OpenOCD的<u>面板配置文件</u>
 
   
 
-**固件刷写成功，但是程序似乎没有运行**
+**Q: 固件刷写成功，但是程序似乎没有运行**
 
 在刷写程序后或者调试开始时，有的时候需要手动按下开发板上的Reset按钮重启
 
-**如果仍然不能解决问题**
+
+**Q: 如果仍然不能解决问题**
 
 请重新对开发板上电、重新连接下载器（更换USB插口）、重启Clion、重启电脑
 
